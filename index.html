@@ -91,7 +91,7 @@
     var themes = Docsify.dom.findAll('[rel="stylesheet"]');
 
     function changeTheme(title) {
-      if (!title) title = "simple-light";
+      if (!title) title = "vue";
       themes.forEach(function (theme) {
         if (theme.title) {
           theme.disabled = theme.title !== title;
