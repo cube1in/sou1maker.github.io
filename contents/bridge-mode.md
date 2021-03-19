@@ -37,6 +37,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // 为了契合自身需求, 修改默认实现
         DoSomething.Serializer = new NewtonSoftSerializerProvider();
         Console.WriteLine(DoSomething.Do());
     }
