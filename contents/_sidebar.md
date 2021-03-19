@@ -3,6 +3,7 @@
 
 **示例**
 * [BridgeMode](bridge-mode.md)
+* [Clone](clone-extension.md)
 
 **笔记**
 * [C#异步编程](csharp-asynchronous-programming.md)
