@@ -1003,4 +1003,5 @@ class Program
 结果显示如下：
 
 ![image-20200609205404686](https://blogcore.oss-cn-shenzhen.aliyuncs.com/markdown/img/20200609205404.png)
+
 调用玩`Set`之后，信号会处于“打开”状态。可以通过调用`Reset`方法将其再次关闭。
