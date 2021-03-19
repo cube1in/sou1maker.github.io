@@ -13,7 +13,7 @@ public interface IJsonSerializerProvider
 
 默认实现`DefaultSerializerProvider`
 
-```charp
+```csharp
 public class DefaultSerializerProvider : IJsonSerializerProvider
 {
     public string Serialize(object value, object jsonSerializerOptions = default)
@@ -30,7 +30,7 @@ public class DefaultSerializerProvider : IJsonSerializerProvider
 
 示例：
 
-```charp
+```csharp
 
 // 主程序
 class Program
