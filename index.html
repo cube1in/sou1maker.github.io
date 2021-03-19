@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Data Explorer</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="assets/katex.min.css">
+  <link rel="stylesheet" href="assets/themes/vue.css" title="vue" disabled>
+  <link rel="stylesheet" href="assets/themes/dark.css" title="dark" disabled>
+  <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-defaults.css" title="simple" disabled>
+  <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple-dark.css" title="simple-dark" disabled>
+  <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple.css" title="simple-light" disabled>
+  <style>
+    .no-underline{
+      text-decoration: none !important;
+    }
+    .no-underline:hover{
+      text-decoration: underline !important;
+    }
+    p[data-lang=plantuml] {
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">加载中...</div>
+  <script>
+    window.$docsify = {
+      name: 'dylanliuu.github.io',
+      basePath: 'contents',
+      loadSidebar: true,
+      loadNavbar: true,
+      subMaxLevel: 3,
+      homepage: 'home.md',
+      // alias: {
+      //   '/.*/_sidebar.md': '/_sidebar.md'
+      // },
+      search: {
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+        paths: 'auto', // or 'auto'
+        placeholder: '搜索',
+
+        noData: 'No 找不到结果!',
+
+        // 搜索标题的最大程级, 1 - 6
+        depth: 6
+      },
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+      },
+      plantuml: {
+        renderSvgAsObject: true,
+      },
+      plugins: [
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/dylanliuu/dylanliuu.github.io/contents';
+            var editHtml = `[:memo: 编辑](${url}${vm.route.file})\n`;
+            return editHtml +
+              html +
+              '\n\n----\n\n' +
+              '<a href="https://github.com/dylanliuu/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 github.io</a>';
+          })
+        }
+      ]
+    }
+  </script>
+  <script src="assets/docsify.min.js"></script>
+  <script src="assets/docsify-katex.js"></script>
+  <script src="assets/search.min.js"></script>
+  <script src="assets/emoji.js"></script>
+  <script src="assets/docsify-pagination.min.js"></script>
+  <script src="assets/docsify-plantuml.min.js"></script>
+  <script src="assets/prism-ini.min.js"></script>
+  <script src="assets/prism-bash.min.js"></script>
+  <script src="assets/prism-markdown.min.js"></script>
+  <script src="assets/prism-nginx.min.js"></script>
+  <script src="assets/prism-csharp.min.js"></script>
+  <script>
+    var themes = Docsify.dom.findAll('[rel="stylesheet"]');
+
+    function changeTheme(title) {
+      if (!title) title = "simple-light";
+      themes.forEach(function (theme) {
+        if (theme.title) {
+          theme.disabled = theme.title !== title;
+        }
+      });
+      localStorage.setItem("docsify.theme", title);
+    }
+    changeTheme(localStorage.getItem("docsify.theme"));
+  </script>
+</body>
+
+</html>
