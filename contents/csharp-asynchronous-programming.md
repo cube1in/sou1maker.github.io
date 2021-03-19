@@ -4,9 +4,9 @@
 
 
 
-### 线程(Thread)：创建线程
+### 一、线程(Thread)：创建线程
 
-#### 什么是线程 Thread
+#### 1. 什么是线程 Thread
 
 线程是一个可执行路径，它可以独立于其它线程执行。
 每个线程都在操作系统的进程(Process)内执行，而操作系统进程提供了程序运行的独立环境。
@@ -59,14 +59,14 @@ class Program
 
 
 
-#### 术语：线程被抢占
+#### 2. 术语：线程被抢占
 
 线程在这个时候就可以被称为**被抢占**了：
 > 它的执行与另外一个线程上代码的执行交织的那一点。
 
 
 
-#### 线程的一些属性
+#### 3. 线程的一些属性
 
 线程一旦开始执行，`IsAlive`就是`true`，线程结束就变成`false`。
 线程结束的条件就是：线程构造函数传入的委托结束了执行。
@@ -116,9 +116,9 @@ class Program
 
 
 
-### Thread.Join() & Thread.Sleep()
+### 二、Thread.Join() & Thread.Sleep()
 
-#### Join and Sleep
+#### 1. Join and Sleep
 
 调用`Join`方法，就可以等待另一个线程结束。
 
@@ -196,7 +196,7 @@ class Program
 
 
 
-#### 添加超时
+#### 2. 添加超时
 
 调用`Join`的时候，可以设置一个超时，用毫秒或者`TimeSpan`都可以。
 > 如果返回`true`，那就是线程结束了；如果超时了，就返回`false`。
@@ -293,9 +293,9 @@ class Program
 
 
 
-### 阻塞 Blocking
+### 三、阻塞 Blocking
 
-#### 阻塞
+#### 1. 阻塞
 
 如果线程的执行由于某种原因导致暂停，我们就认为该线程被阻塞了。
 > 例如在`Slepp`或者通过`Join`等待其他线程结束
@@ -361,7 +361,7 @@ public static ThreadState SimpleThreadState (ThreadState ts)
 
 
 
-#### 解除阻塞Unblocking
+#### 2. 解除阻塞Unblocking
 
 当遇到下列四种情况的时候，就会解除阻塞：
 1. 阻塞条件被满足
@@ -371,7 +371,7 @@ public static ThreadState SimpleThreadState (ThreadState ts)
 
 
 
-#### 上下文切换
+#### 3. 上下文切换
 
 当线程阻塞或解除阻塞时，操作系统将执行上下文切换。这会产生少量开销，通常为`1`或`2`微秒。
 
@@ -385,7 +385,7 @@ public static ThreadState SimpleThreadState (ThreadState ts)
 
 
 
-#### 阻塞 vs 忙等待（自旋）-  Blocking vs Spinning
+#### 4. 阻塞 vs 忙等待（自旋）-  Blocking vs Spinning
 
 I/O-bound 操作的工作方式有两种：
 1. 在当前线程上同步的等待
@@ -411,11 +411,11 @@ I/O-bound 操作的工作方式有两种：
 
 
 
-### 什么是线程安全
+### 四、什么是线程安全
 
-#### 本地 vs 共享的状态 - Local vs Shared State
+本地 vs 共享的状态 - Local vs Shared State
 
-##### Local 本地独立
+#### 1. Local 本地独立
 
 `CLR`为每个线程分配自己的内存栈（`Stack`），以便使本地变量保持独立。
 
@@ -448,7 +448,7 @@ class Program
 
 
 
-##### Shared 共享
+#### 2. Shared 共享
 
 如果多个线程都引用到同一个对象的实例，那么它们就共享了数据。
 
@@ -563,7 +563,7 @@ class ThreadTest
 
 
 
-### 线程安全（Thread Safety）
+### 五、线程安全（Thread Safety）
 
 后三个例子就引出了**线程安全**这个关键概念（或者说缺乏线程安全）
 上述例子的输出实际上是无法确定的：
@@ -615,7 +615,7 @@ class ThreadTest
 
 
 
-#### 锁定与线程安全（Locking & Thread Safety）
+#### 1. 锁定与线程安全（Locking & Thread Safety）
 
 在读取和写入共享数据的时候，通过使用一个互斥锁（exclusive lock），就可以修复前面的例子的问题。
 C#使用`lock`语句来加锁。
@@ -675,9 +675,9 @@ Lock不是线程安全的银弹，很容易忘记对字段加锁，`lock`也会�
 
 
 
-### 向线程传递数据 & 异常处理
+### 六、向线程传递数据 & 异常处理
 
-#### 向线程传递数据
+#### 1. 向线程传递数据
 
 如果你想往线程的启动方法里传递参数，最简单的方法就是使用`lambda`表达式，在里面使用参数调用方法。
 
@@ -725,7 +725,7 @@ class Program
 
 
 
-#### 向线程传递数据（在 C# 3.0 之前）
+#### 2. 向线程传递数据（在 C# 3.0 之前）
 
 在 **C# 3.0** 之前，没有`lambda`表达式。可以使用 **Thread** 的`Start`方法来传递参数。
 **Thread** 的重载构造函数可以接受下列两个委托之一作为参数：
@@ -755,7 +755,7 @@ class Program
 
 
 
-### Lambda 表达式与被捕获的变量
+### 七、Lambda 表达式与被捕获的变量
 
 使用 **Lambda** 表达式可以简单的给 **Thread** 传递参数。但是线程开始后，可能会不小心修改了被捕获的变量，这要多加注意。
 
@@ -815,7 +815,7 @@ class Program
 
 
 
-#### 异常处理
+#### 1. 异常处理
 
 创建线程时在作用范围内的`try/catch/finally`块，在线程开始执行后就与线程无关了。
 
@@ -884,9 +884,9 @@ class Program
 
 
 
-### 前台线程 & 后台线程
+### 八、前台线程 & 后台线程
 
-#### 前台线程 & 后台线程（Foreground vs Background Threads）
+#### 1. 前台线程 & 后台线程（Foreground vs Background Threads）
 
 默认情况下，你手动创建的线程就是前台线程。
 只要有前台线程在运行，那么应用程序就会一直处于活动状态。
@@ -940,9 +940,9 @@ class Program
 
 
 
-### 线程优先级
+### 九、线程优先级
 
-#### 线程优先级
+#### 1. 线程优先级
 
 线程的优先级（**Thread** 的`Priority`属性）决定了相对于操作系统中其它活跃线程所占的执行时间。
 优先级（`Priority`属性）分为：
@@ -950,7 +950,7 @@ class Program
 
 
 
-#### 提升线程优先级
+#### 2. 提升线程优先级
 
 提升线程优先级的时候需要特别注意，因为它可能“饿死”其他线程。
 如果想让某线程（**Thread**）的优先级比其它进程（**Process**）中的线程（**Thread**）高，那就必须提升进程（**Process**）的优先级
@@ -963,9 +963,9 @@ class Program
 
 
 
-### 信号简介
+### 十、信号简介
 
-#### 信号（Signaling）
+#### 1. 信号（Signaling）
 
 有时，你需要让某线程一直处于等待的状态，直至接收其它线程发来的通知。这就叫做 **signaling** （发送信号）。
 最简单的信号结构就是 **ManualResetEvent**。
