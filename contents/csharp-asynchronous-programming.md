@@ -21,7 +21,7 @@
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -81,7 +81,7 @@ class Program
 
 
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -126,7 +126,7 @@ class Program
 
 例子1
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -155,7 +155,7 @@ class Program
 
 例子2
 
-```c#
+```csharp
 class Program
 {
     static Thread thread1, thread2;
@@ -216,7 +216,7 @@ class Program
 
 例子1
 
-```c#
+```csharp
 class Program
 {
     static Thread thread1, thread2;
@@ -258,7 +258,7 @@ class Program
 
 例子2
 
-```c#
+```csharp
 class Program
 {
     static TimeSpan waitTime = new TimeSpan(0, 0, 1);
@@ -303,7 +303,7 @@ class Program
 被阻塞的线程会立即将其处理器的时间片生成给其它线程，从此就不再消耗处理器的时间，直到满足其阻塞条件为止。
 可以通过`ThreadState`这个属性（枚举）来判断线程是否处于被阻塞的状态：
 
-```c# 
+```csharp
 bool blocked = (someThread.ThreadState & ThreadState.waitSleepJoin) != 0;
 ```
 
@@ -323,7 +323,7 @@ bool blocked = (someThread.ThreadState & ThreadState.waitSleepJoin) != 0;
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -344,7 +344,7 @@ class Program
 
 但是它的大部分的枚举值都没什么用，下面的代码将`ThreadState`剥离为四个最有用的值之一：`Unstarted`、`Running`、`WaitSleepJoin`和`Stopped`
 
-```c#
+```csharp
 public static ThreadState SimpleThreadState (ThreadState ts)
 {
     return ts & (ThreadState.Unstarted |
@@ -423,7 +423,7 @@ I/O-bound 操作的工作方式有两种：
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -456,7 +456,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class ThreadTest
 {
     
@@ -493,7 +493,7 @@ class ThreadTest
 
 例子
 
-```c#
+```csharp
 class ThreadTest
 {    
     static void Main()
@@ -529,7 +529,7 @@ class ThreadTest
 
 例子
 
-```c#
+```csharp
 class ThreadTest
 {
     
@@ -575,7 +575,7 @@ class ThreadTest
 
 例子
 
-```c#
+```csharp
 class ThreadTest
 {
     
@@ -625,7 +625,7 @@ C#使用`lock`语句来加锁。
 
 例子
 
-```c#
+```csharp
 class ThreadTest
 {
     
@@ -685,7 +685,7 @@ Lock不是线程安全的银弹，很容易忘记对字段加锁，`lock`也会�
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -709,7 +709,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -736,7 +736,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -763,7 +763,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -789,7 +789,7 @@ class Program
 
 解决方案例子：
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -823,7 +823,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -849,7 +849,7 @@ class Program
 
 解决方案例子：
 
-```c#
+```csharp
 class Program
 {
     static void Main()
@@ -901,7 +901,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main(string[] args)
@@ -975,7 +975,7 @@ class Program
 
 例子
 
-```c#
+```csharp
 class Program
 {
     static void Main(string[] args)
