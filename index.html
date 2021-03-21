@@ -27,6 +27,7 @@
 
 <body>
   <div id="app">加载中...</div>
+  <div id="gitalk-container"></div>
   <script>
     window.$docsify = {
       name: 'Sou1Maker',
@@ -76,15 +77,17 @@
     }
   </script>
   <script>
-    const gitalk = new gitalk({
+    const gitalk = new Gitalk({
     clientID: 'a93d9d765495bd7cf403',
     clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
     repo: 'sou1maker.github.io',
     owner: 'sou1maker',
     admin: ['sou1maker'],
-    // facebook-like distraction free mode
+    id: location.pathname,
     distractionFreeMode: false
     })
+    
+    gitalk.render('gitalk-container')
   </script>
   <script src="assets/docsify.min.js"></script>
   <script src="assets/docsify-katex.js"></script>
