@@ -27,7 +27,6 @@
 
 <body>
   <div id="app">加载中...</div>
-  <div id="gitalk-container"></div>
   <script>
     window.$docsify = {
       name: 'Sou1Maker',
@@ -36,7 +35,6 @@
       loadNavbar: true,
       subMaxLevel: 3,
       homepage: 'home.md',
-      disqus: '简称',
       alias: {
         '/.*/_sidebar.md': '/_sidebar.md'
       },
@@ -72,22 +70,18 @@
               '\n\n----\n\n' +
               '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>';
           })
-        }
+        },
+        const gitalk = new Gitalk({
+        clientID: 'a93d9d765495bd7cf403',
+        clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
+        repo: 'gitalk-comment',
+        owner: 'sou1maker',
+        admin: ['sou1maker'],
+        id: location.pathname,
+        distractionFreeMode: false
+        })
       ]
     }
-  </script>
-  <script>
-    const gitalk = new Gitalk({
-    clientID: 'a93d9d765495bd7cf403',
-    clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
-    repo: 'sou1maker.github.io',
-    owner: 'sou1maker',
-    admin: ['sou1maker'],
-    id: location.pathname,
-    distractionFreeMode: false
-    })
-    
-    gitalk.render('gitalk-container')
   </script>
   <script src="assets/docsify.min.js"></script>
   <script src="assets/docsify-katex.js"></script>
