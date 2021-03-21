@@ -61,15 +61,6 @@
       errorText  : '错误',
       successText: '已复制至粘贴板'
       },
-      const gitalk = new Gitalk({
-      clientID: 'a93d9d765495bd7cf403',
-      clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
-      repo: 'sou1maker.github.io',
-      owner: 'sou1maker',
-      admin: ['sou1maker'],
-      // facebook-like distraction free mode
-      distractionFreeMode: false
-      }),
       plugins: [
         function (hook, vm) {
           hook.beforeEach(function (html) {
@@ -83,6 +74,17 @@
         }
       ]
     }
+  </script>
+  <script>
+    const gitalk = new Gitalk({
+    clientID: 'a93d9d765495bd7cf403',
+    clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
+    repo: 'sou1maker.github.io',
+    owner: 'sou1maker',
+    admin: ['sou1maker'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false
+    })
   </script>
   <script src="assets/docsify.min.js"></script>
   <script src="assets/docsify-katex.js"></script>
