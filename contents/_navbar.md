@@ -3,10 +3,10 @@
 
 - 主题
   - <a data-theme="vue" href="javascript:void(0)" onclick="changeTheme('vue')">Vue</a>
-  - <a data-theme="dark" href="javascript:void(0)" onclick="changeTheme('dark')">黑色</a>
-  - <a data-theme="dark" href="javascript:void(0)" onclick="changeTheme('simple')">扁平花</a>
-  - <a data-theme="dark" href="javascript:void(0)" onclick="changeTheme('simple-light')">简约亮</a>
-  - <a data-theme="dark" href="javascript:void(0)" onclick="changeTheme('simple-dark')">简约暗</a>
+  - <a data-theme="dark" href="javascript:void(0)" onclick="changeTheme('dark')">Dark</a>
+  - <a data-theme="pure" href="javascript:void(0)" onclick="changeTheme('pure')">Pure</a>
+  - <a data-theme="buble" href="javascript:void(0)" onclick="changeTheme('buble')">Buble</a>
+  - <a data-theme="dolphin" href="javascript:void(0)" onclick="changeTheme('dolphin')">Dolphin</a>
 
 <!-- markdownlint-enable MD041 -->
 <!-- markdownlint-enable MD033 -->
