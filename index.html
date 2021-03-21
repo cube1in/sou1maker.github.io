@@ -89,6 +89,16 @@
   <script src="assets/gitalk.min.js"></script>
   <script src="assets/docsify-gitalk.min.js"></script>
   <script>
+    const gitalk = new Gitalk({
+      clientID: 'a93d9d765495bd7cf403',
+      clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
+      repo: 'gitalk-comment',
+      owner: 'sou1maker',
+      admin: ['sou1maker'],
+      distractionFreeMode: false
+    })
+  </script>
+  <script>
     var themes = Docsify.dom.findAll('[rel="stylesheet"]');
 
     function changeTheme(title) {
@@ -102,16 +112,7 @@
     }
     changeTheme(localStorage.getItem("docsify.theme"));
   </script>
-  <script>
-    const gitalk = new Gitalk({
-      clientID: 'a93d9d765495bd7cf403',
-      clientSecret: '77a30b374435ce6ca40b2aa0c2fd99642d838f75',
-      repo: 'gitalk-comment',
-      owner: 'sou1maker',
-      admin: ['sou1maker'],
-      distractionFreeMode: false
-    })
-  </script>
+
 </body>
 
 </html>
