@@ -1,6 +1,8 @@
 # [protobuf-net](https://github.com/protobuf-net/protobuf-net)
 
-**前提：** 微软提供了在序列化过程中可回调的`Attribute`。 被这些`Attribute`标记的方法, 会在序列化/反序列化过程中被回调
+## 一、大前提
+
+微软提供了在序列化过程中可回调的`Attribute`。 被这些`Attribute`标记的方法, 会在序列化/反序列化过程中被回调
 
 [[OnSerializing]](https://docs.microsoft.com/zh-cn/dotnet/api/system.runtime.serialization.onserializingattribute?view=net-5.0)
 
@@ -12,7 +14,9 @@
 
 
 
-**产生的问题：** protobuf-net 对继承于 `ICollection`/`IEnumerable`/`IDictionary` 等的类无法触发这些`Attribute`
+## 二、产生的问题
+
+protobuf-net 对继承于 `ICollection`/`IEnumerable`/`IDictionary` 等的类无法触发这些`Attribute`
 
 示例代码：
 
@@ -70,39 +74,47 @@
     }
 ```
 
-##### 这种情况下, 被`Attribute`标记的方法并不会被回调.
+## 三、分析
 
-> 原因是在序列化过程中, protobuf-net会生成两个`MetaType`, 一个是`ICollection<KeyValuePair<string,string>>`,
-> 另一个是`ExampleDictionary`(也就是我们自定义类)
+#### 这种情况下, 被`Attribute`标记的方法并不会被回调.
+
+1. 原因是在序列化过程中, protobuf-net会生成两个`MetaType`, 一个是`ICollection<KeyValuePair<string,string>>`,另一个是`ExampleDictionary`(也就是我们自定义类)
 
 ![image](https://user-images.githubusercontent.com/58240137/112269591-8696da80-8cb3-11eb-9024-12bd99087ff8.png)
 
 
-> 查看`MetaType`类, 发现`BuildSerializer`方法(也就是说, 将每一个MetaType都Build一个Serializer对其进行处理)
+2. 查看`MetaType`类, 发现`BuildSerializer`方法(也就是说, 将每一个MetaType都Build一个Serializer对其进行处理)
 
 ![image](https://user-images.githubusercontent.com/58240137/112269862-e2f9fa00-8cb3-11eb-8351-55a49c976313.png)
 
 ![image](https://user-images.githubusercontent.com/58240137/112269928-ff963200-8cb3-11eb-8458-e4770ab0479e.png)
 
-> 专门查看下对于`ExampleDictionary`这个`MetaType`所Build出来的Serializer, 发现是名为`TypeSerializer`
+
+3. 专门查看下对于`ExampleDictionary`这个`MetaType`所Build出来的Serializer, 发现是名为`TypeSerializer`
 
 ![image](https://user-images.githubusercontent.com/58240137/112271135-84ce1680-8cb5-11eb-9ab9-8c700a3f2bf6.png)
 
-PS: 其实因为ExampleDictionary类没有给属性添加`[ProtoMember]`Attribute, 所以无法Read和Write
+> PS: 其实因为ExampleDictionary类没有给属性添加`[ProtoMember]`Attribute, 所以无法Read和Write
 
-> 继续找下去, 发现`Callback`方法, 这里就会调用我们设置的回调`OnDeserializing`等Attribute
+
+4. 继续找下去, 发现`Callback`方法, 这里就会调用我们设置的回调`OnDeserializing`等Attribute
 
 ![image](https://user-images.githubusercontent.com/58240137/112271685-33725700-8cb6-11eb-8418-64bd02f030bf.png)
 
-> 之所以没有回调, 是因为`this.callbacks`为空。而为空的原因正是在`TypeSerializer`的构造函数中传入的callbacks为空导致的。
+
+5. 之所以没有回调, 是因为`this.callbacks`为空。而为空的原因正是在`TypeSerializer`的构造函数中传入的callbacks为空导致的。
 
 ![image](https://user-images.githubusercontent.com/58240137/112272051-a54aa080-8cb6-11eb-91ae-fe3443d00fa8.png)
+
 
 ##### 也就是说在`MetaType`执行`BuildSerializer`方法时, 没有传入`callbacks`
 
 ![image](https://user-images.githubusercontent.com/58240137/112272319-02deed00-8cb7-11eb-9fb1-049c69a779dc.png)
 
-> 修改源码, 传入`callbacks`即可(后续下载源码修改/打包等操作不再说明)
+
+## 四、解决方案
+
+#### 修改源码, 传入`callbacks`即可(后续下载源码修改/打包等操作不再说明)
 
 ![image](https://user-images.githubusercontent.com/58240137/112272428-24d86f80-8cb7-11eb-8d7f-128b730f4bcb.png)
 
