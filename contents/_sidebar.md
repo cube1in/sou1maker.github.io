@@ -1,13 +1,18 @@
 <!-- markdownlint-disable MD041 -->
 <!-- markdownlint-disable MD036 -->
 
+**便签**
+* [emoji-list](sticky-note-emoji-list.md)
+
 **示例**
 * [BridgeMode](example-bridge-mode.md)
 * [Clone](example-clone-extension.md)
 * [JsonFormatter](example-json-formatter.md)
 
-**笔记**
-* [C#异步编程](note-csharp-asynchronous-programming.md)
 
-**踩坑**
+**恐慌**
 * [protobuf-net](panic-protobuf-net.md)
+
+
+**笔记**
+* [C#异步编程](record-csharp-asynchronous-programming.md)
