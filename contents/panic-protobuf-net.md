@@ -1,6 +1,6 @@
 # [protobuf-net](https://github.com/protobuf-net/protobuf-net)
 
-## 一、大前提
+## 大前提
 
 微软提供了在序列化过程中可回调的`Attribute`。 被这些`Attribute`标记的方法, 会在序列化/反序列化过程中被回调
 
@@ -14,7 +14,7 @@
 
 
 
-## 二、产生的问题
+## 产生的问题
 
 protobuf-net 对继承于 `ICollection`/`IEnumerable`/`IDictionary` 等的类无法触发这些`Attribute`
 
@@ -74,7 +74,7 @@ protobuf-net 对继承于 `ICollection`/`IEnumerable`/`IDictionary` 等的类无
     }
 ```
 
-## 三、分析
+## 分析
 
 #### 这种情况下, 被`Attribute`标记的方法并不会被回调.
 
@@ -112,7 +112,7 @@ protobuf-net 对继承于 `ICollection`/`IEnumerable`/`IDictionary` 等的类无
 ![image](https://user-images.githubusercontent.com/58240137/112272319-02deed00-8cb7-11eb-9fb1-049c69a779dc.png)
 
 
-## 四、解决方案
+## 解决方案
 
 #### 修改源码, 传入`callbacks`即可(后续下载源码修改/打包等操作不再说明)
 
