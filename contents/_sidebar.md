@@ -3,6 +3,7 @@
 
 **便签**
 * [emoji-list](sticky-note-emoji-list.md)
+* [JsonPath Expression](sticky-note-json-path-expression.md)
 
 **示例**
 * [BridgeMode](example-bridge-mode.md)
