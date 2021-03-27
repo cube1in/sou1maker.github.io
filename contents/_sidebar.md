@@ -3,7 +3,6 @@
 
 **便签**
 
-- [emoji-list](sticky-notes/emoji-list.md)
 - [JsonPath Expression](sticky-notes/json-path-expression.md)
 
 **示例**
