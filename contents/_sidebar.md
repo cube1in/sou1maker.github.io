@@ -2,18 +2,20 @@
 <!-- markdownlint-disable MD036 -->
 
 **便签**
-* [emoji-list](sticky-note-emoji-list.md)
-* [JsonPath Expression](sticky-note-json-path-expression.md)
+
+- [emoji-list](sticky-notes/emoji-list.md)
+- [JsonPath Expression](sticky-notes/json-path-expression.md)
 
 **示例**
-* [BridgeMode](example-bridge-mode.md)
-* [Clone](example-clone-extension.md)
-* [JsonFormatter](example-json-formatter.md)
 
+- [BridgeMode](examples/bridge-mode.md)
+- [Clone](examples/clone-extension.md)
+- [JsonFormatter](examples/json-formatter.md)
 
 **恐慌**
-* [protobuf-net](panic-protobuf-net.md)
 
+- [protobuf-net](panics/protobuf-net.md)
 
 **笔记**
-* [C#异步编程](record-csharp-asynchronous-programming.md)
+
+- [C#异步编程](records/csharp-asynchronous-programming.md)
