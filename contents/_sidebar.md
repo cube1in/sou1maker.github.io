@@ -19,6 +19,7 @@
 **设计**
 
 - [异常处理和本地化](design/exception&localization.md)
+- [Migration](design/migration.md)
 
 **笔记**
 
