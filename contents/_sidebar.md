@@ -16,6 +16,10 @@
 
 - [protobuf-net](panics/protobuf-net.md)
 
+**设计**
+
+- [异常处理和本地化](design/exception&localization.md)
+
 **笔记**
 
 - [C#异步编程](records/csharp-asynchronous-programming.md)
