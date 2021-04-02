@@ -11,6 +11,7 @@
 - [BridgeMode](examples/bridge-mode.md)
 - [Clone](examples/clone-extension.md)
 - [JsonFormatter](examples/json-formatter.md)
+- [HotReload](examples/hot-reload.md)
 
 **恐慌**
 
