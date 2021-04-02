@@ -5,7 +5,16 @@
 > 利用`AssemblyLoadContext`和`Microsoft.CodeAnalysis.CSharp`库实现插件热加载
 
 
-### 🚧 施工中...
+#### 目录结构
+
+    |-- HotReload
+        |-- IPlugin.cs
+        |-- PluginController.cs
+        |-- Program.cs
+        |-- guest
+            |-- MyPlugin.cs
+
+
 
 > `IPlugin`继承`IDisposable`，提供销毁`Dispose`方法
 
@@ -238,3 +247,9 @@
       }
   }
 ```
+
+#### 💡 在生成时可设置`MyPlugin`连同guest文件夹一起Copy到输出目录，这样在读取时根据方便
+
+![image](https://user-images.githubusercontent.com/58240137/113433654-3685e980-9412-11eb-9dc6-7674cb9e5de8.png)
+
+
