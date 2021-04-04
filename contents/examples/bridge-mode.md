@@ -1,5 +1,9 @@
 # 桥接模式(BridgeMode)
 
+<!-- tabs:start -->
+
+### **IJsonSerializerProvider**
+
 提供`IJsonSerializerProvider`接口
 
 ```csharp
@@ -10,6 +14,8 @@ public interface IJsonSerializerProvider
     T Deserialize<T>(string json, object jsonSerializerOptions = default);
 }
 ```
+
+### **DefaultSerializerProvider**
 
 默认实现`DefaultSerializerProvider`
 
@@ -27,6 +33,8 @@ public class DefaultSerializerProvider : IJsonSerializerProvider
     }
 }
 ```
+
+<!-- tabs:end -->
 
 示例：
 
