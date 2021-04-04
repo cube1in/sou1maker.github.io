@@ -2,6 +2,8 @@
 
 **简述：** 在项目过程中遇到`Json`字符串，可能会出现格式很杂乱/没有缩进的情况
 
+> 当然，你也可以使用*Newtonsoft*中的`JObject`对`json`文件进行处理（这样会多一个超大的依赖）
+
 <!-- tabs:start -->
 
 ### **JsonFormatter**
