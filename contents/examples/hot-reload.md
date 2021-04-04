@@ -14,7 +14,9 @@
         |-- guest
             |-- MyPlugin.cs
 
+<!-- tabs:start -->
 
+### **IPlugin**
 
 > `IPlugin`继承`IDisposable`，提供销毁`Dispose`方法
 
@@ -24,6 +26,12 @@
       string GetMessage();
   }
 ```
+
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+### **PluginController**
 
 > `PluginController`继承`IPlugin`
 
@@ -191,6 +199,12 @@
   }
 ```
 
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+### **MyPlugin**
+
 > `MyPlugin`插件
 
 ```csharp
@@ -213,6 +227,8 @@
 
   }
 ```
+
+<!-- tabs:end -->
 
 > `Program`演示
 
