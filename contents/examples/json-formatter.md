@@ -2,8 +2,11 @@
 
 **简述：** 在项目过程中遇到`Json`字符串，可能会出现格式很杂乱/没有缩进的情况
 
+<!-- tabs:start -->
 
-> JsonFormatter
+### **JsonFormatter**
+
+> `JsonFormatter`
 
 ```csharp
 public static class JsonFormatter
@@ -80,6 +83,8 @@ public static class JsonFormatter
 }
 ```
 
+### **StringExtension**
+
 > StringExtension
 
 ```csharp
@@ -103,3 +108,5 @@ public static class StringExtensions
     }
 }
 ```
+
+<!-- tabs:end -->
