@@ -85,7 +85,7 @@ public static class JsonFormatter
 
 ### **StringExtension**
 
-> StringExtension
+> `StringExtension`
 
 ```csharp
 public static class StringExtensions
