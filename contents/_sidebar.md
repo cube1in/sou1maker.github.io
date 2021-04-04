@@ -22,6 +22,7 @@
 
 - [异常处理和本地化](design/exception&localization.md)
 - [Migration](design/migration.md)
+- [PluginHotReload-Prime](design/plugin-hot-reload-prime.md)
 
 **笔记**
 
