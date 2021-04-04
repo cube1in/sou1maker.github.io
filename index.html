@@ -60,6 +60,13 @@
       errorText  : '错误',
       successText: '已复制至粘贴板'
       },
+      tabs: {
+      persist    : true,      // 确定在刷新/重新访问页面后是否将还原选项卡选择
+      sync       : true,      // 确定选项卡选择是否将在具有匹配标签的选项卡之间同步
+      theme      : 'classic', // 主题
+      tabComments: true,      // 确定是否可以使用选项卡注释定义选项卡集中的选项卡
+      tabHeadings: true       // 确定是否可以使用标题+粗体markdown定义选项卡集中的选项卡
+      },
       plugins: [
         function (hook, vm) {
           hook.beforeEach(function (html) {
