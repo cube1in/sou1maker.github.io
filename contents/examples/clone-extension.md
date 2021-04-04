@@ -1,11 +1,12 @@
 # Clone 克隆
 
-继承`IClonable`, 并实现`Clone`方法
 > PS: 此处我使用序列化和反序列化的方式实现了**深克隆**
 
 <!-- tabs:start -->
 
 ### **Table**
+
+> 继承`IClonable`, 并实现`Clone`方法
 
 ```csharp
 public class Table : ICloneable
