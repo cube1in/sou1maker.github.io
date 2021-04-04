@@ -4,6 +4,8 @@
 
 我平常探索过程中发现的有趣的都会收集到这里, 欢迎查阅。 :mouse:
 
+:point_right: 点击此处去到主页: https://sou1maker.github.io/
+
 </br>
 
 </br>
