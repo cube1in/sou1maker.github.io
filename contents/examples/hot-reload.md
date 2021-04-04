@@ -27,10 +27,6 @@
   }
 ```
 
-<!-- tabs:end -->
-
-<!-- tabs:start -->
-
 ### **PluginController**
 
 > `PluginController`继承`IPlugin`
@@ -198,10 +194,6 @@
       }
   }
 ```
-
-<!-- tabs:end -->
-
-<!-- tabs:start -->
 
 ### **MyPlugin**
 
