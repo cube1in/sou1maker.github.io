@@ -3,6 +3,10 @@
 继承`IClonable`, 并实现`Clone`方法
 > PS: 此处我使用序列化和反序列化的方式实现了**深克隆**
 
+<!-- tabs:start -->
+
+### **Table**
+
 ```csharp
 public class Table : ICloneable
 {
@@ -28,7 +32,9 @@ public class Table : ICloneable
 }
 ```
 
-为了更方便使用, 建立`CloneableExtensions`
+### **CloneableExtensions**
+
+> 为了更方便使用, 建立`CloneableExtensions`
 
 ```csharp
 public static class CloneableExtensions
@@ -36,6 +42,8 @@ public static class CloneableExtensions
     public static T Clone<T>(this ICloneable self) => (T) self.Clone();
 }
 ```
+
+<!-- tabs:end -->
 
 示例
 
