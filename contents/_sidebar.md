@@ -13,6 +13,7 @@
 - [Clone](examples/clone-extension.md)
 - [JsonFormatter](examples/json-formatter.md)
 - [PluginHotReload](examples/plugin-hot-reload.md)
+- [Regex](examples/regex.md)
 
 **恐慌**
 
