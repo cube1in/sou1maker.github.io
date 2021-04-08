@@ -1,6 +1,6 @@
 # Regex
 
-<!-- tabs-start -->
+<!-- tabs:start -->
 
 ### **Extensions**
 
@@ -25,4 +25,4 @@
   }
 ```
 
-<!-- tabs-end -->
+<!-- tabs:end -->
