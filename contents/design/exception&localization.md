@@ -15,15 +15,17 @@
 目录结构：
 
     |-- Localization
-        |-- Lang.cs // 全局静态类 提供`Lang.Text["name", args]`
-        |-- LocalizationSetting.cs // 配置项
-        |-- Resource.cs // 静态获取`Json`，与异常处理共用
-        |-- UnifyLocalizer.cs // 继承官方 IStringLocalizer
-        |-- UnifyLocalizerFactory.cs // 继承官方 IStringLocalizerFactory
+        |-- Lang.cs
+        |-- LocalizationSetting.cs
+        |-- Resource.cs
+        |-- UnifyLocalizer.cs
+        |-- UnifyLocalizerFactory.cs
 
 <!-- tabs:start -->
 
-### Lang
+### **Lang**
+
+> 全局静态类 提供`Lang.Text["name", args]`
 
 ```csharp
   public static class Lang
@@ -32,7 +34,9 @@
   }
 ```
 
-### LocalizationSetting
+### **LocalizationSetting**
+
+>  相关的配置项
 
 ```csharp
   public class LocalizationSettings
@@ -50,7 +54,9 @@
   }
 ```
 
-### Resource
+### **Resource**
+
+>  静态获取`Json`。与异常处理共用
 
 ```csharp
   public static class Resources
@@ -118,7 +124,9 @@
   }
 ```
 
-### UnifyLocalizer
+### **UnifyLocalizer**
+
+> 继承官方`IStringLocalizer` 为了支持依赖注入
 
 ```csharp
   public class UnifyLocalizer : IStringLocalizer
@@ -219,7 +227,9 @@
   }
 ```
 
-### UnifyLocalizerFactory
+### **UnifyLocalizerFactory**
+
+>  继承官方`IStringLocalizerFactory`。为了支持依赖注入
 
 ```csharp
   public class UnifyLocalizerFactory : IStringLocalizerFactory
