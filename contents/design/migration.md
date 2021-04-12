@@ -6,3 +6,18 @@
 
 
 ### 🚧 施工中...
+
+#### 基础库`DatabaseMigration`
+
+目录结构：
+
+  |-- DatabaseMigration
+      |-- Extensions
+          |-- DbContextExtensions.cs
+          |-- MigrationContextBuilderExtensions.cs
+      |-- IMigrationDbContext.cs
+      |-- MigrationMonitor.cs
+      |-- MigrationTask.cs
+
+
+#### Web程序
