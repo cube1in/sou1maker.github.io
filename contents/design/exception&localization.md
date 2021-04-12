@@ -6,8 +6,6 @@
 > 2. 本地化提供依赖注入和全局静态类`L`，允许调用此类的方法`Lang.Text["name", args]`以提供本地化(读取`Json`文件)
 > 3. 微软有默认的[`StringLocalizer<TResourceSource>`](https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.extensions.localization.stringlocalizer-1?view=dotnet-plat-ext-5.0)，但读取的文件是`.resx`文件。
 
-### 🚧 施工中...
-
 ## 一、本地化 Localization
 
 > PS：这里实现的本地化，更多意义上只是读取文件内容，然后按`Dictionary<Key,Value>`键值对取值。是一种取(阉)巧(割)
