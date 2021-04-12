@@ -11,13 +11,13 @@
 
 目录结构：
 
-  |-- DatabaseMigration
-      |-- Extensions
-          |-- DbContextExtensions.cs
-          |-- MigrationContextBuilderExtensions.cs
-      |-- IMigrationDbContext.cs
-      |-- MigrationMonitor.cs
-      |-- MigrationTask.cs
+    |-- DatabaseMigration
+        |-- Extensions
+            |-- DbContextExtensions.cs
+            |-- MigrationContextBuilderExtensions.cs
+        |-- IMigrationDbContext.cs
+        |-- MigrationMonitor.cs
+        |-- MigrationTask.cs
 
 
 #### Web程序
