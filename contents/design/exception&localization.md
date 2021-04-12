@@ -241,3 +241,177 @@
 ```
 
 <!-- tabs:end -->
+
+
+## 二、全局异常 Exception
+
+目录结构：
+
+    |-- UnifyException
+        |-- E.cs
+        |-- ErrorCodeAttribute.cs
+        |-- ErrorMessageAttribute.cs
+        |-- FriendlyExcetption.cs
+
+<!-- tabs:start -->
+
+### **E**
+
+> 全局静态异常抛出类
+
+```csharp
+  public static class E
+  {
+      private const string DefaultErrorMessage = "Oh, Oops! Something Wrong.";
+
+      private const string SearchPath = "ErrorCodes";
+
+      static E()
+      {
+          try
+          {
+              Resources.Search(SearchPath);
+          }
+          catch (Exception e)
+          {
+              Console.WriteLine(e);
+              throw;
+          }
+      }
+
+      private static (string?, string) MontageErrorMessage(object errorCode, params object[] args)
+      {
+          if (errorCode is not Enum @enum)
+          {
+              return (null, errorCode.ToString() ?? DefaultErrorMessage);
+          }
+
+          var errorStr = @enum.ToString();
+
+          var resources = Resources.Get();
+          resources.TryGetValue(errorStr, out var errorMessage);
+
+          if (errorMessage is null)
+          {
+              // 获取 ErrorCodeItem
+              var errorType = @enum.GetType();
+              var fieldInfo = errorType.GetField(Enum.GetName(errorType, @enum)!);
+
+              var errorCodeItem = fieldInfo?.GetCustomAttribute<ErrorMessageAttribute>();
+              errorMessage = errorCodeItem?.ErrorMessage;
+          }
+
+          return (errorStr, FormatErrorMessage(errorMessage ?? DefaultErrorMessage, args));
+
+          static string FormatErrorMessage(string errorMessage, params object[]? args)
+          {
+              return args is null || args is {Length: 0} ? errorMessage : string.Format(errorMessage, args);
+          }
+      }
+
+      /// <summary>
+      /// 抛出异常
+      /// </summary>
+      /// <param name="errorCode">关于错误的枚举</param>
+      /// <param name="args">参数</param>
+      /// <returns></returns>
+      public static Exception OopsOh(object errorCode, params object[] args)
+      {
+          var (code, message) = MontageErrorMessage(errorCode, args);
+
+          return new FriendlyException(message, code);
+      }
+
+      /// <summary>
+      /// 抛出异常
+      /// </summary>
+      /// <param name="errorCode">关于错误的枚举</param>
+      /// <param name="innerException">实际异常</param>
+      /// <param name="args">参数</param>
+      /// <returns></returns>
+      public static Exception OopsOh(object errorCode, Exception innerException, params object[] args)
+      {
+          var (code, message) = MontageErrorMessage(errorCode, args);
+
+          return new FriendlyException(message, code, innerException);
+      }
+  }
+```
+
+### **ErrorCodeAttribute**
+
+> `ErrorCode`标记`Attribute`
+
+```csharp
+  /// <summary>
+  /// 错误代码属性标记
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Enum)]
+  public sealed class ErrorCodeAttribute : Attribute
+  {
+  }
+```
+
+### **ErrorMessageAttribute**
+
+> 默认错误消息`Attribute`
+
+```csharp
+  /// <summary>
+  /// 错误消息模板
+  /// </summary>
+  /// <example>
+  /// public MyErrorCode {
+  ///     [ErrorMessage("A error was found.")]
+  ///     ErrorA,
+  ///     [ErrorMessage("B error was found.")]
+  ///     ErrorB,
+  /// }
+  /// </example>
+  [AttributeUsage(AttributeTargets.Field)]
+  public sealed class ErrorMessageAttribute : Attribute
+  {
+      /// <summary>
+      /// 构造函数
+      /// </summary>
+      /// <param name="errorMessage">错误消息</param>
+      public ErrorMessageAttribute(string errorMessage) => ErrorMessage = errorMessage;
+
+      /// <summary>
+      /// 错误消息
+      /// </summary>
+      // ReSharper disable once MemberCanBePrivate.Global
+      internal string ErrorMessage { get;}
+  }
+```
+
+### **FriendlyException**
+
+> `Exception` 定义类
+
+```csharp
+  public class FriendlyException : Exception
+  {
+      internal FriendlyException()
+      {
+      }
+
+      internal FriendlyException(string message, object? errorCode)
+          : base(message)
+          => this.ErrorCode = errorCode;
+
+      internal FriendlyException(string message, object? errorCode, Exception innerException)
+          : base(message, innerException)
+          => this.ErrorCode = errorCode;
+
+      internal FriendlyException(SerializationInfo info, StreamingContext context)
+          : base(info, context)
+      {
+      }
+
+      public object? ErrorCode { get; set; }
+  }
+```
+
+<!-- tabs:end -->
+
