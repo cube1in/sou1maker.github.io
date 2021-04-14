@@ -10,7 +10,7 @@
 
 1. 基础库静态类，不适用依赖注入(提供可复用行)
 2. 管理类`MigrationMonitor`中的`MigrationAsync`为`DbContext`的拓展方法(简易调用)
-3. 适用*Microsoft.NET.Sdk*，而不是*Microsoft.NET.Sdk.Web*(基础库)
+3. 使用*Microsoft.NET.Sdk*，而不是*Microsoft.NET.Sdk.Web*(基础库)
 4. 全局反射获取继承了`MigrationTask`的类，从而调用类中的`Up`和`Down`方法
 
 #### 基础库
