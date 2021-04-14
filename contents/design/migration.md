@@ -19,8 +19,8 @@
 
 目录结构：
 
-    |-- DatabaseMigration
-        |-- MigrationHistory
+    |-- Infrastructure.DatabaseMigration
+        |-- MigrationDbContext
             |-- DatabaseMigrationContext.cs
             |-- DatabaseMigrationFactory.cs
             |-- MigrationHistory.cs
