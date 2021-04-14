@@ -79,6 +79,10 @@
 > 编写数据迁移类时需要继承的基类，用于给`MigraionMonitor`通过反射调用`Up`方法和`Down`方法
 
 ```csharp
+  /// <summary>
+  /// 数据迁移基类
+  /// </summary>
+  /// <typeparam name="TDbContext"></typeparam>
   public abstract class MigrationTask<TDbContext> where TDbContext : DbContext
   {
       /// <summary>
