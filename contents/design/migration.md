@@ -13,7 +13,9 @@
 3. 适用*Microsoft.NET.Sdk*，而不是*Microsoft.NET.Sdk.Web*(基础库)
 4. 全局反射获取继承了`MigrationTask`的类，从而调用类中的`Up`和`Down`方法
 
-#### 基础库`Infrastructure.DatabaseMigration`
+#### 基础库
+
+> `Infrastructure.DatabaseMigration`
 
 目录结构：
 
