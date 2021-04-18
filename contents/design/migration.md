@@ -365,6 +365,7 @@
 方案：
 > 1. 使用的是`MigrationDbContext`进行建表和添加数据操作。
 > 2. 由于方案*1*，所以需要提取外部传入的`DbContext`中的`Options`。然后使用这个`Options`创建出`MigrationDbContext`。
+
 > PS: 每个`DbContext`里的连接信息和使用数据库的信息都是由`Options`中的`Extensions`决定的，所以只要拿到了`Options`，就能创建出任何类型的数据库。
 
 ```csharp
