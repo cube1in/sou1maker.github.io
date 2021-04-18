@@ -46,7 +46,7 @@ public static class CloneableExtensions
 
 <!-- tabs:end -->
 
-示例
+:cupid: 示例
 
 ```csharp
 static class Program
