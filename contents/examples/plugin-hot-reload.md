@@ -1,5 +1,11 @@
 # 插件热加载
 
+#### 🎉 `.NET 6`将支持热加载 - 也就是说以下内容可能没必要了
+
+<br/>
+
+<br/>
+
 > **Microsoft.CodeAnalysis.CSharp** [传送门](https://docs.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.csharp?view=roslyn-dotnet)
 
 > 利用`AssemblyLoadContext`和`Microsoft.CodeAnalysis.CSharp`库实现插件热加载
