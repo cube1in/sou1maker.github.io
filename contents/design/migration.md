@@ -4,9 +4,9 @@
 
 > 迁移(Migration)：可以分为两部分：1. 结构迁移  2. 数据迁移
 
-微软里的*Entity Framework Core*提供了默认的 [Migration](https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
+:cupid: 微软里的*Entity Framework Core*提供了默认的 [Migration](https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 
-提供以下特征：
+:star2: 此库提供以下特征：
 
 1. 基础库静态类，不适用依赖注入(提供可复用行)
 2. 管理类`DbContextExtensions`中的`MigrationAsync`为`DbContext`的拓展方法(简易调用)
@@ -17,7 +17,7 @@
 
 > `Infrastructure.DatabaseMigration`
 
-目录结构：
+:page_with_curl: 目录结构：
 
     |-- Infrastructure.DatabaseMigration
         |-- Extensions
@@ -358,15 +358,15 @@
 
 ### **DbContextCreateNewDbContextExtensions**
 
-这个类时为了解决这两个问题而存在的：
+:question: 这个类时为了解决这两个问题而存在的：
 > 1. 将`MigrationHistory`这个表建立到从`MigrateAsync(DbContext dbContext)`传入的`dbContext`中的数据库去(这里传入的数据库类型可能是多种多样的：`Postgrest`/`MySql`/`Oracle`等)。
 > 2. 建立好`MigrationHistory`表之后，我们需要往表里添加数据。
 
-方案：
+:star2: 方案：
 > 1. 使用的是`MigrationDbContext`进行建表和添加数据操作。
 > 2. 由于方案*1*，所以需要提取外部传入的`DbContext`中的`Options`。然后使用这个`Options`创建出`MigrationDbContext`。
 
-> PS: 每个`DbContext`里的连接信息和使用数据库的信息都是由`Options`中的`Extensions`决定的，所以只要拿到了`Options`，就能创建出任何类型的数据库。
+:yellow_heart: 每个`DbContext`里的连接信息和使用数据库的信息都是由`Options`中的`Extensions`决定的，所以只要拿到了`Options`，就能创建出任何类型的数据库。
 
 ```csharp
   public static class DbContextCreateNewDbContextExtensions
