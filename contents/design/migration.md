@@ -20,6 +20,8 @@
 目录结构：
 
     |-- Infrastructure.DatabaseMigration
+        |-- Extensions
+            |-- DbContextCreateNewDbContextExtensions.cs
         |-- HistoryDbContext
             |-- MigrationDbContext.cs
             |-- MigrationHistory.cs
@@ -351,6 +353,60 @@
       /// 描述
       /// </summary>
       public string? Description { get; set; }
+  }
+```
+
+### **DbContextCreateNewDbContextExtensions**
+
+这个类时为了解决这两个问题而存在的：
+> 1. 将`MigrationHistory`这个表建立到从`MigrateAsync(DbContext dbContext)`传入的`dbContext`中的数据库去(这里传入的数据库类型可能是多种多样的：`Postgrest`/`MySql`/`Oracle`等)。
+> 2. 建立好`MigrationHistory`表之后，我们需要往表里添加数据。
+
+方案：
+> 1. 使用的是`MigrationDbContext`进行建表和添加数据操作。
+> 2. 由于方案*1*，所以需要提取外部传入的`DbContext`中的`Options`。然后使用这个`Options`创建出`MigrationDbContext`。
+
+```csharp
+  public static class DbContextCreateNewDbContextExtensions
+  {
+      private static readonly FieldInfo DbContextOptionsFieldInfo = typeof(DbContext).GetField("_options",
+          BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField)!;
+
+
+      /// <summary>
+      /// 从已有的 DbContext，创建一个新的类型的 DbContext
+      /// </summary>
+      /// <param name="context"></param>
+      /// <typeparam name="TContext"></typeparam>
+      /// <returns></returns>
+      /// <exception cref="ArgumentNullException">给的 DbContext 没有 Options</exception>
+      /// <exception cref="InvalidOperationException">没有合适的构造函数 DbContextOptions[TContext]</exception>
+      public static TContext CreateNewDbContext<TContext>(this DbContext context) where TContext : DbContext
+      {
+          var options = DbContextOptionsFieldInfo.GetValue(context);
+          if (!(options is DbContextOptions dbContextOptions))
+          {
+              throw new ArgumentNullException(nameof(context), "context.Options");
+          }
+
+          var builder = new DbContextOptionsBuilder<TContext>();
+
+          var builderInfrastructure = (IDbContextOptionsBuilderInfrastructure) builder;
+          foreach (var extension in dbContextOptions.Extensions)
+          {
+              builderInfrastructure.AddOrUpdateExtension(extension);
+          }
+
+          var constructor = typeof(TContext).GetConstructor(new[] {typeof(DbContextOptions<TContext>)});
+
+          if (constructor == null)
+          {
+              throw new InvalidOperationException(
+                  $"No suitable constructor found for DbContext type '${typeof(TContext).Name}'");
+          }
+
+          return (TContext) constructor.Invoke(new object?[] {builder.Options});
+      }
   }
 ```
 
