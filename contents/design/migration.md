@@ -20,23 +20,22 @@
 目录结构：
 
     |-- Infrastructure.DatabaseMigration
-        |-- MigrationHistory
-            |-- DatabaseMigrationDbContext.cs
-            |-- DatabaseMigrationDbContextFactory.cs
-            |-- DatabaseMigrationHistory.cs
-        |-- DbContextExtensions.cs
-        |-- MigrationTask.cs
-        |-- DataMigrationAttribute.cs
+        |-- HistoryDbContext
+            |-- MigrationDbContext.cs
+            |-- MigrationHistory.cs
+        |-- DbContextMigrateExtensions.cs
+        |-- DataMigrationTask.cs
+        |-- DataMigrationTaskAttribute.cs
 
 
 <!-- tabs:start -->
 
-### **DbContextExtensions**
+### **DbContextMigrateExtensions**
 
 > 作为`DbContext`的拓展，提供`MigrateAsync`方法
 
 ```csharp
-  public static class DbContextExtensions
+  public static class DbContextMigrateExtensions
   {
       /// <summary>
       /// 执行迁移
@@ -47,10 +46,8 @@
       {
           if (!MigrationEnabled()) return;
 
-          // 创建DatabaseMigrationDbContext(使用using执行完后释放)
-          var databaseMigrationDbContextFactory = new DatabaseMigrationDbContextFactory();
-          await using var migrationDbContext =
-              databaseMigrationDbContextFactory.CreateDbContext(new string[] { });
+          // 创建 MigrationDbContext
+          var migrationDbContext = dbContext.CreateNewDbContext<MigrationDbContext>();
 
           // 反射获取待办的MigrationTask
           var pendingMigrations = GetPendingMigrations();
@@ -74,7 +71,7 @@
                           new object[] {dbContext})!;
 
                       // 添加一条数据迁移记录
-                      var migrationHistory = new DatabaseMigrationHistory
+                      var migrationHistory = new MigrationHistory
                       {
                           MigrationId = migrationId,
                           ExecutionTime = DateTime.Now
@@ -88,11 +85,10 @@
 
 
           // 是否需要执行此数据迁移
-          static async ValueTask<bool> IsMigrationTaskRequired(DatabaseMigrationDbContext migrationDbContext,
+          static async ValueTask<bool> IsMigrationTaskRequired(MigrationDbContext migrationDbContext,
               string migrationId)
           {
-              await migrationDbContext.InternalMigrateAsync();
-
+              await migrationDbContext.Database.EnsureCreatedAsync();
               var migrationsHistory =
                   migrationDbContext.MigrationsHistories.FirstOrDefault(u => u.MigrationId == migrationId);
 
@@ -108,8 +104,7 @@
               return true;
 
 #else
-                  return Environment.GetEnvironmentVariable("DATABASE_AUTO_UPGRADE")?.ToUpper() == "TRUE" &&
-                         Environment.GetEnvironmentVariable("DATA_AUTO_UPGRADE")?.ToUpper() == "TRUE";
+                  return Environment.GetEnvironmentVariable("DB_MIGRATION_ENABLED")?.ToUpper() == "TRUE";
 
 #endif
           }
@@ -130,7 +125,6 @@
           migrationFileMatcher.AddInclude("*Ef.Migrations.*.dll");
 
 #if TEST
-
           migrationFileMatcher.AddInclude("Infrastructure.DatabaseMigration.Tests.dll");
 
 #endif
@@ -146,15 +140,28 @@
 
               var migrationTaskTypes =
                   assembly.ExportedTypes.Where(u =>
-                      u.BaseType != null && u.BaseType.IsGenericType &&
-                      u.BaseType.GetGenericTypeDefinition() == typeof(MigrationTask<>));
+                      u.BaseType is {IsGenericType: true} &&
+                      u.BaseType.GetGenericTypeDefinition() == typeof(DataMigrationTask<>));
 
               foreach (var migrationTaskType in migrationTaskTypes)
               {
-                  var dataMigrationAttribute = migrationTaskType.GetCustomAttribute<DataMigrationAttribute>(true);
+                  var dataMigrationAttribute = migrationTaskType.GetCustomAttribute<DataMigrationTaskAttribute>(true);
 
-                  if (dataMigrationAttribute != null && !dataMigrationAttribute.Obsolete)
+                  if (dataMigrationAttribute != null)
                   {
+#if DEBUG
+                      // DEBUG模式下，检查是否存在该结构迁移
+                      var structureMigrationAttributes = assembly.ExportedTypes
+                          .Select(u => u.GetCustomAttribute<MigrationAttribute>());
+
+                      if (dataMigrationAttribute.EfMigrationIds.Any(s =>
+                          !structureMigrationAttributes.Any(u => u != null && u.Id == s)))
+                      {
+                          throw new ArgumentException("efMigrationId does not exist.");
+                      }
+
+#endif
+
                       if (!pendingMigrations.ContainsKey(dataMigrationAttribute.EfMigrationIds))
                       {
                           pendingMigrations.Add(dataMigrationAttribute.EfMigrationIds,
@@ -181,22 +188,22 @@
       private static async ValueTask InternalMigrateAsync(this DbContext dbContext, string? targetMigration = null,
           CancellationToken cancellationToken = default)
       {
-          await dbContext.GetInfrastructure().GetService<IMigrator>()
+          await dbContext.GetInfrastructure().GetService<IMigrator>()!
               .MigrateAsync(targetMigration: targetMigration, cancellationToken: cancellationToken);
       }
   }
 ```
 
-### **MigrationTask**
+### **DataMigrationTask**
 
-> 编写数据迁移类时需要继承的基类，用于给`MigraionMonitor`通过反射调用`Up`方法和`Down`方法
+> 编写数据迁移类时需要继承的基类，用于给`DbContextMigrateExtensions`通过反射调用`Up`方法和`Down`方法
 
 ```csharp
   /// <summary>
   /// 数据迁移基类
   /// </summary>
   /// <typeparam name="TDbContext"></typeparam>
-  public abstract class MigrationTask<TDbContext> where TDbContext : DbContext
+  public abstract class DataMigrationTask<TDbContext> where TDbContext : DbContext
   {
       /// <summary>
       /// 迁移
@@ -214,12 +221,13 @@
   }
 ```
 
-### **DataMigrationAttribute**
+### **DataMigrationTaskAttribute**
 
-> 编写数据迁移类时需要标记上的`Attribute`，用于给`MigraionMonitor`通过反射获取到数据迁移类所属的结构迁移和自身*MigrationId*
+> 编写数据迁移类时需要标记上的`Attribute`，用于给`DbContextMigrateExtensions`通过反射获取到数据迁移类所属的结构迁移和自身*MigrationId*
 
 ```csharp
-  public class DataMigrationAttribute : Attribute
+  [AttributeUsage(AttributeTargets.Class)]
+  public class DataMigrationTaskAttribute : Attribute
   {
       /// <summary>
       /// 数据迁移Id
@@ -230,12 +238,6 @@
       public string MigrationId { get; }
 
       /// <summary>
-      /// 是否过时
-      /// 如果为true则不会执行此数据升级所属的结构升级，也不会执行此数据升级
-      /// </summary>
-      public bool Obsolete { get; }
-
-      /// <summary>
       /// 所属结构的文件名
       /// <example>
       /// 20210415063152_TestDbContext_init
@@ -244,9 +246,8 @@
       public string[] EfMigrationIds { get; }
 
       /// <param name="migrationId">自身Id(唯一)</param>
-      /// <param name="obsolete">是否过时</param>
       /// <param name="efMigrationIds">所属结构的文件名</param>
-      public DataMigrationAttribute(string migrationId, bool obsolete, params string[] efMigrationIds)
+      public DataMigrationTaskAttribute(string migrationId, params string[] efMigrationIds)
       {
 #if DEBUG
           var migrationIdTimeSpanStr = migrationId.Substring(0, 14);
@@ -280,33 +281,32 @@
 #endif
 
           MigrationId = migrationId;
-          Obsolete = obsolete;
           EfMigrationIds = efMigrationIds;
       }
   }
 ```
 
-### **DatabaseMigrationDbContext**
+### **MigrationDbContext**
 
-> 不用多说，*EF Core*内容
+> 不用多说，*EF Core*内容，唯一需要注意的就是`Vsersion`与`String`直接的转换器
 
 ```csharp
-  public class DatabaseMigrationDbContext : DbContext
+  public class MigrationDbContext : DbContext
   {
-      public DatabaseMigrationDbContext(DbContextOptions<DatabaseMigrationDbContext> options)
+      public MigrationDbContext(DbContextOptions<MigrationDbContext> options)
           : base(options)
       {
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
-          modelBuilder.Entity<DatabaseMigrationHistory>()
+          modelBuilder.Entity<MigrationHistory>()
               .Property(q => q.ProductVersion)
               .HasConversion(new VersionToStringConverter());
       }
 
-      public DbSet<DatabaseMigrationHistory> MigrationsHistories { get; set; } = null!;
-      
+      public DbSet<MigrationHistory> MigrationsHistories { get; set; } = null!;
+
       private class VersionToStringConverter : ValueConverter<Version, string>
       {
           public VersionToStringConverter(ConverterMappingHints? mappingHints = null)
@@ -320,34 +320,15 @@
   }
 ```
 
-### **DatabaseMigrationDbContextFactory**
-
-> 这里不使用依赖注入的方式获取`DbContext`，所以通过这种方法去创建
-
-特别提醒：继承`IDesignTimeDbContextFactory`是在使用命令`dotnet ef migrations add xxx`增加迁移时，*ef core*将会读取目录是否有这个类，若无，则无法增加迁移
-
-```csharp
-  public class DatabaseMigrationDbContextFactory : IDesignTimeDbContextFactory<DatabaseMigrationDbContext>
-  {
-      public DatabaseMigrationDbContext CreateDbContext(string[] args)
-      {
-          var builder = new DbContextOptionsBuilder<DatabaseMigrationDbContext>();
-
-          builder.UseSqlite("Data Source = ./migration_history.db");
-
-          return new DatabaseMigrationDbContext(builder.Options);
-      }
-  }
-```
-
-### **DatabaseMigrationHistory**
+### **MigrationHistory**
 
 ```csharp
   /// <summary>
-  /// 迁移历史
+  /// 数据迁移历史
+  /// 需要和EfCore的__EFMigrationsHistory进行区分
   /// </summary>
   [Table("__MigrationsHistory")]
-  public class DatabaseMigrationHistory
+  public class MigrationHistory
   {
       /// <summary>
       /// 迁移Id
@@ -358,7 +339,7 @@
       /// <summary>
       /// 产品版本
       /// </summary>
-      public Version ProductVersion { get; set; } = new (4, 0, 0, 0);
+      public Version ProductVersion { get; set; } = new(4, 0, 0, 0);
 
 
       /// <summary>
