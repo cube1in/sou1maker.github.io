@@ -1,6 +1,6 @@
 # 全局异常处理和本地化
 
-提供以下特征：
+🌟 此库提供以下特征：
 
 > 1. 全局异常处理静态类`E`，允许调用此类的方法`E.OopsOh`抛出`FriendlyException`
 > 2. 本地化提供依赖注入和全局静态类`L`，允许调用此类的方法`Lang.Text["name", args]`以提供本地化(读取`Json`文件)
@@ -10,7 +10,7 @@
 
 > PS：这里实现的本地化，更多意义上只是读取文件内容，然后按`Dictionary<Key,Value>`键值对取值。是一种取(阉)巧(割)
 
-目录结构：
+📃 目录结构：
 
     |-- Localization
         |-- Lang.cs
@@ -243,7 +243,7 @@
 
 ## 二、全局异常 Exception
 
-目录结构：
+📃 目录结构：
 
     |-- UnifyException
         |-- E.cs
