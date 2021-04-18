@@ -5,7 +5,7 @@
 > 利用`AssemblyLoadContext`和`Microsoft.CodeAnalysis.CSharp`库实现插件热加载
 
 
-#### 目录结构
+📃 目录结构
 
     |-- HotReload
         |-- IPlugin.cs
@@ -222,7 +222,7 @@
 
 <!-- tabs:end -->
 
-> `Program`演示
+:cupid: 示例
 
 ```csharp
   class Program
