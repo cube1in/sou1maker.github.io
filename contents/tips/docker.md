@@ -12,10 +12,16 @@ $ docker ps
 $ docker images
 ```
 
+### **Load**
+
+```bash
+$ docker load -i [image_file_name]
+```
+
 ### **BackUp**
 
 ```bash
-$ docker commit -p [container_name] [new_image_name]
+$ docker commit [container_name] [new_image_name]
 ```
 
 ```bash
