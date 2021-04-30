@@ -6,7 +6,7 @@
 
 :cupid: 微软里的*Entity Framework Core*提供了默认的 [Migration](https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 
-:star2: 此库提供以下特征：
+:star2: Principles：
 
 1. 基础库静态类，不适用依赖注入(提供可复用行)
 2. 管理类`DbContextExtensions`中的`MigrationAsync`为`DbContext`的拓展方法(简易调用)
