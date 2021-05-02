@@ -1,5 +1,7 @@
 # 安装Aria2
 
+> 让树莓派当作下载机
+
 1. 安装`Aria2`:
 
 > :point_right: [`Aria2`](https://github.com/aria2/aria2)
