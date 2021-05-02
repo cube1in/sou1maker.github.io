@@ -32,6 +32,11 @@
 - [Widgets](flutter/widgets.md)
 - [Utils](flutter/utils.md)
 
+**RaspberryPi**
+
+- [初始配置](raspberrypi/initial.md)
+- [Aria2](raspberrypi/aria2.md)
+
 **笔记**
 
 - [C#异步编程](records/csharp-asynchronous-programming.md)
