@@ -180,7 +180,7 @@ git clone https://github.com/ziahamza/webui-aria2.git /var/www/html
 nano /etc/rc.local
 ```
 
-> 将以下复制到exit 0之前
+> 将以下复制到`exit 0`之前
 
 ```text
 aria2c --conf-path=/etc/aria2/aria2.conf -D
