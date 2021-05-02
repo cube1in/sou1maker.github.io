@@ -15,7 +15,9 @@ pi/raspberry
 sudo passwd root
 ```
 
-### 多WiFi配置(通过`priority`指定顺序)
+### 多WiFi配置
+
+> 通过`priority`指定顺序
 
 ```bash
 nano /etc/wpa_supplicant/wpa_supplicant.conf
