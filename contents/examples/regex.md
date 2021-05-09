@@ -50,7 +50,7 @@
 
 ### **Extensions**
 
-> ReplaceAsync
+#### 1. ReplaceAsync
 
 ```csharp
   public static async Task<string> ReplaceAsync(this Regex regex, string input, Func<Match, Task<string>> replacementFn)
