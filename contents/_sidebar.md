@@ -4,9 +4,7 @@
 **便签**
 
 - [Docker](tips/docker.md)
-- Newtonsoft
-  - [JsonPath Expression](tips/newtonsoft/json-path-expression.md)
-  - [JsonSerializerSettings](tips/newtonsoft/json-serializer-settings.md)
+- [Newtonsoft](tips/newtonsoft.md)
 - [Urls](tips/urls.md)
 
 **示例**
