@@ -8,8 +8,6 @@
 
 ### **JsonFormatter**
 
-> `JsonFormatter`
-
 ```csharp
 public static class JsonFormatter
 {
@@ -86,8 +84,6 @@ public static class JsonFormatter
 ```
 
 ### **StringExtension**
-
-> `StringExtension`
 
 ```csharp
 public static class StringExtensions
