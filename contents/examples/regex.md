@@ -6,7 +6,7 @@
 
 ### **常用正则**
 
-#### 1. 匹配中国大陆手机号码的正则表达式.
+**1. 匹配中国大陆手机号码的正则表达式**
 
 [`更多...`](https://github.com/VincentSit/ChinaMobilePhoneNumberRegex/blob/master/README-CN.md)
 
@@ -14,7 +14,7 @@
 ^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[235-8]\d{2}|4(?:0\d|1[0-2]|9\d))|9[0-35-9]\d{2}|66\d{2})\d{6}$
 ```
 
-#### 2. 无限嵌套括号的正则表达式
+**2. 无限嵌套括号的正则表达式**
 
 周围组合一些递归逻辑来实现这一点
 
@@ -50,7 +50,7 @@
 
 ### **Extensions**
 
-#### 1. ReplaceAsync
+**1. ReplaceAsync**
 
 ```csharp
   public static async Task<string> ReplaceAsync(this Regex regex, string input, Func<Match, Task<string>> replacementFn)
