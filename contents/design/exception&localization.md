@@ -1,6 +1,6 @@
 # 全局异常处理和本地化
 
-### :unicorn: Principles：
+#### :unicorn: Principles：
 
 > 1. 全局异常处理静态类`E`，允许调用此类的方法`E.OopsOh`抛出`FriendlyException`
 > 2. 本地化提供依赖注入和全局静态类`L`，允许调用此类的方法`Lang.Text["name", args]`以提供本地化(读取`Json`文件)
