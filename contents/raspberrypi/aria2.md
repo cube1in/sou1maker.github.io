@@ -2,7 +2,7 @@
 
 #### :unicorn: 让树莓派当作下载机
 
-1. 安装`Aria2`:
+**1. 安装`Aria2`:**
 
 > :point_right: [`Aria2`](https://github.com/aria2/aria2)
 
@@ -10,20 +10,20 @@
 apt-get install aria2
 ```
 
-2. 创建 Aria2 的配置文件夹:
+**2. 创建 Aria2 的配置文件夹:**
 
 ```bash
 mkdir /etc/aria2
 ```
 
-3. 创建`aria2.session`和`aria2.congig`配置文件:
+**3. 创建`aria2.session`和`aria2.congig`配置文件:**
 
 ```bash
 touch /etc/aria2/aria2.session
 touch /etc/aria2/aria2.conf
 ```
 
-4. 编辑`/etc/aria2/aria2.conf`:
+**4. 编辑`/etc/aria2/aria2.conf`:**
 
 ```bash
 nano /etc/aria2/aria2.conf
@@ -108,13 +108,13 @@ bt-seed-unverified=true
 bt-save-metadata=true
 ```
 
-5. 启动`Aria2`后台运行命令(无输出代表成功):
+**5. 启动`Aria2`后台运行命令(无输出代表成功):**
 
 ```bash
 aria2c --conf-path=/etc/aria2/aria2.conf -D
 ```
 
-6. 编辑`/etc/init.d/aria2c`, 以添加开机自启:
+**6. 编辑`/etc/init.d/aria2c`, 以添加开机自启:**
 
 ```bash
 nano /etc/init.d/aria2c
@@ -153,13 +153,13 @@ esac
 exit $RETVAL
 ```
 
-7. 安装`nginx`, 以使用`Aria2`前端界面
+**7. 安装`nginx`, 以使用`Aria2`前端界面:**
 
 ```bash
 apt-get -y install nginx
 ```
 
-8. 下载前端第三方程序`webui-aria2`:
+**8. 下载前端第三方程序`webui-aria2`:**
 
 > :point_right: [`webui-aria2`](https://github.com/ziahamza/webui-aria2)
 
@@ -168,13 +168,13 @@ rm -rf /var/www/html
 git clone https://github.com/ziahamza/webui-aria2.git /var/www/html
 ```
 
-9. 启动`nginx`:
+**9. 启动`nginx`:**
 
 ```bash
 /etc/init.d/nginx start
 ```
 
-10. 添加自启动(`nginx`和`Aria2`):
+**10. 添加自启动(`nginx`和`Aria2`):**
 
 ```bash
 nano /etc/rc.local
