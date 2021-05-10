@@ -35,6 +35,10 @@
 - [初始配置](raspberrypi/initial.md)
 - [Aria2](raspberrypi/aria2.md)
 
+**软路由**
+
+- [OpenWrt](router/openwrt.md)
+
 **笔记**
 
 - [C#异步编程](records/csharp-asynchronous-programming.md)
