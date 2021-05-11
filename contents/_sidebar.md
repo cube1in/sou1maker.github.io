@@ -24,6 +24,7 @@
 **恐慌**
 
 - [protobuf-net](panics/protobuf-net.md)
+- [Centos](panics/centos.md)
 
 **Flutter**
 
