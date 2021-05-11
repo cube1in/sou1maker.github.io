@@ -2,9 +2,13 @@
 
 **:unicorn: 软路由配置教程**
 
-这里使用的是`LEDE`系统
+:heartbeat: **拓扑图：**
+
+![image](https://user-images.githubusercontent.com/58240137/117744535-7757f600-b23b-11eb-83fc-b9fe46530a4a.png)
 
 ### 准备工作
+
+这里使用的是`LEDE`系统
 
 刷入`image`的工具`win32diskimager`下载地址：[Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/)
 
@@ -25,8 +29,7 @@
 
 之后软路由设备设置U盘为第一启动，等待`image`刷入完成即可
 
-
-### 设置`OpenWrt`
+### 配置`OpenWrt`
 
 默认的IP地址：192.168.1.1
 
