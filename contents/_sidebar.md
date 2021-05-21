@@ -6,6 +6,7 @@
 - [Docker](tips/docker.md)
 - [Newtonsoft](tips/newtonsoft.md)
 - [Urls](tips/urls.md)
+- [RepositoryFinder](tips/repository-finder.md)
 
 **示例**
 
