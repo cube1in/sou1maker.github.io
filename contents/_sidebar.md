@@ -10,6 +10,7 @@
 
 **示例**
 
+- [NPOI](examples/npoi.md)
 - [BridgeMode](examples/bridge-mode.md)
 - [Clone](examples/clone-extension.md)
 - [JsonFormatter](examples/json-formatter.md)
