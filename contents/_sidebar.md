@@ -41,6 +41,7 @@
 **软路由**
 
 - [OpenWrt](router/openwrt.md)
+- [BuildLEDE](router/build-lede.md)
 
 **笔记**
 
