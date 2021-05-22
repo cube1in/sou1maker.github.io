@@ -1,6 +1,6 @@
 # 构建自己的[`LEDE`](https://github.com/coolsnowwolf/lede)包
 
-#### 主要的编译过程为：
+### 编译
 
 ##### 1. 更新包管理工具
 
@@ -88,3 +88,32 @@ make -j$(($(nproc) + 1)) V=s
 具体详情请访问：[`LEDE`](https://github.com/coolsnowwolf/lede)
 
 
+### 虚拟机测试
+
+##### 1. 修改为lan口ip地址为dhcp获取
+
+```bash
+uci set network.lan.proto=dhcp
+```
+
+##### 2. 保存网络配置
+
+```bash
+uci commit network
+```
+
+##### 3. 重启网络
+
+```bash
+/etc/init.d/network restart
+```
+
+##### 4. 查看状态
+
+```bash
+uci show network
+```
+
+##### 5. 通过`ifconfig`查看 br-lan 的`ip`地址
+
+在浏览器中输入相应的`ip`即可进入OpenWrt管理
