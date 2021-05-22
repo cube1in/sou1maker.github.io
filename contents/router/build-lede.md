@@ -77,7 +77,13 @@ make -j8 download V=s
 make -j$(($(nproc) + 1)) V=s
 ```
 
-##### 9. 后记
+##### 9. 生成文件
+
+最后生成文件在`lede/bin/targets/具体环境`目录下
+
+![image](https://user-images.githubusercontent.com/58240137/119229706-cd863c80-bb4b-11eb-95ce-d0a9948f109e.png)
+
+##### 10. 后记
 
 具体详情请访问：[`LEDE`](https://github.com/coolsnowwolf/lede)
 
