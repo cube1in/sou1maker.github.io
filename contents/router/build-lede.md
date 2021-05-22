@@ -90,30 +90,56 @@ make -j$(($(nproc) + 1)) V=s
 
 ### 虚拟机测试
 
-##### 1. 修改为lan口ip地址为dhcp获取
+##### 1. 创建虚拟机
+
+> 稍后安装操作系统
+
+![image](https://user-images.githubusercontent.com/58240137/119234649-9d499880-bb61-11eb-96cd-6947375ca20f.png)
+
+> 其他 Linux 5.x 及更高版本内核 64 位
+
+![image](https://user-images.githubusercontent.com/58240137/119234680-b9e5d080-bb61-11eb-8ebc-1fd1b03d512d.png)
+
+> 命名
+
+![image](https://user-images.githubusercontent.com/58240137/119234703-d41fae80-bb61-11eb-8d66-521ade579d80.png)
+
+> 使用网络地址转换(NAT)
+
+![image](https://user-images.githubusercontent.com/58240137/119234751-07623d80-bb62-11eb-9647-9908ef17e727.png)
+
+> 使用现有虚拟磁盘
+
+![image](https://user-images.githubusercontent.com/58240137/119234779-282a9300-bb62-11eb-92c9-f80bff81049e.png)
+
+选择此前生成的`.vmdk`文件
+
+![image](https://user-images.githubusercontent.com/58240137/119234599-63789200-bb61-11eb-9641-dbbf7a737dbb.png)
+
+##### 2. 修改为`lan`口`ip`地址为`dhcp`获取
 
 ```bash
 uci set network.lan.proto=dhcp
 ```
 
-##### 2. 保存网络配置
+##### 3. 保存网络配置
 
 ```bash
 uci commit network
 ```
 
-##### 3. 重启网络
+##### 4. 重启网络
 
 ```bash
 /etc/init.d/network restart
 ```
 
-##### 4. 查看状态
+##### 5. 查看状态
 
 ```bash
 uci show network
 ```
 
-##### 5. 通过`ifconfig`查看 br-lan 的`ip`地址
+##### 6. 通过`ifconfig`查看 br-lan 的`ip`地址
 
 在浏览器中输入相应的`ip`即可进入OpenWrt管理
