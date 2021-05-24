@@ -43,6 +43,10 @@
 - [OpenWrt](router/openwrt.md)
 - [BuildLEDE](router/build-lede.md)
 
+**Deepin系统**
+
+- [重命名以挂载磁盘](deepin/change-mounted-disk-name.md)
+
 **笔记**
 
 - [C#异步编程](records/csharp-asynchronous-programming.md)
