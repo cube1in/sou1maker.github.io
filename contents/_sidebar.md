@@ -45,7 +45,7 @@
 
 **Deepin系统**
 
-- [重命名以挂载磁盘](deepin/change-mounted-disk-name.md)
+- [重命名已挂载磁盘](deepin/change-mounted-disk-name.md)
 
 **笔记**
 
