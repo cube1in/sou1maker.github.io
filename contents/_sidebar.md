@@ -45,7 +45,7 @@
 
 **Deepin系统**
 
-- [Deepin相关配置](deepin-settings.md)
+- [Deepin相关配置](deepin/deepin-settings.md)
 
 **笔记**
 
