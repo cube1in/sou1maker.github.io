@@ -35,6 +35,7 @@ systemctl restart systemd-sysctl.service
 ### 输入法配置
 
 ```bash
+# 打开输入法配置界面
 fcitx-config-gtk3
 ```
 
