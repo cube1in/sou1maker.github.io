@@ -25,6 +25,9 @@ sudo sysctl -a | grep fs.inotify.max_user_watches
 
 # 修改上限
 sudo sysctl -w fs/inotify/max_user_watches=10000000
+
+# 重启服务
+systemctl restart systemd-sysctl.service
 ```
 
 ***
