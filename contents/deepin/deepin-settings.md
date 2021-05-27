@@ -30,6 +30,26 @@ sudo sysctl -w fs/inotify/max_user_watches=10000000
 systemctl restart systemd-sysctl.service
 ```
 
+此方法可能重启后失效，使用以下方式直接修改文件
+
+1. 修改文件
+
+```bash
+sudo vim /etc/sysctl.conf
+```
+
+2. 添加以下参数
+
+```text
+fs.inotify.max_user_watches = 10000000
+```
+
+3. 使文件生效
+
+```bash
+sudo /sbin/sysctl -p
+```
+
 ***
 
 ### 输入法配置
