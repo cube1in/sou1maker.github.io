@@ -1,6 +1,6 @@
 # 含泛型的反射
 
-假设先在需要通过反射调用实现了`IMagrationTask`的类
+假设现在需要通过反射调用实现了`IMagrationTask`的类
 
 ```csharp
   public interface IMigrationTask
