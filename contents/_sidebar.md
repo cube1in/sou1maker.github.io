@@ -12,6 +12,7 @@
 
 - [NPOI](examples/npoi.md)
 - [BridgeMode](examples/bridge-mode.md)
+- [GenericReflectio](examples/generic-reflection.md)
 - [Clone](examples/clone-extension.md)
 - [JsonFormatter](examples/json-formatter.md)
 - [PluginHotReload](examples/plugin-hot-reload.md)
