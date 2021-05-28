@@ -14,9 +14,10 @@
 那么可以使用以下这种方法
 
 ```csharp
-typeof(IMigrationTask).GetMethod("Up", BindingFlags.Static | BindingFlags.NonPublic)!
-                      .MakeGenericMethod(dbContextType)
-                      .Invoke(null, new object[] {dbContext});
+  // dataMigrationTaskType子类的type
+  dataMigrationTaskType.GetMethod("Up", BindingFlags.Static | BindingFlags.NonPublic)!
+                        .MakeGenericMethod(dbContextType)
+                        .Invoke(null, new object[] {dbContext});
 ```
 
 或者使用以下取巧
@@ -54,6 +55,7 @@ typeof(IMigrationTask).GetMethod("Up", BindingFlags.Static | BindingFlags.NonPub
 在使用时
 
 ```csharp
+// dataMigrationTaskType子类的type
   var dataMigration = (IDataMigrationTask) Activator.CreateInstance(dataMigrationTaskType)!;
   await dataMigration.Up(currentContext);
 ```
