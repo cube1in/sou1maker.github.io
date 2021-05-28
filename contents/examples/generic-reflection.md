@@ -55,7 +55,7 @@
 在使用时
 
 ```csharp
-// dataMigrationTaskType子类的type
+  // dataMigrationTaskType子类的type
   var dataMigration = (IDataMigrationTask) Activator.CreateInstance(dataMigrationTaskType)!;
   await dataMigration.Up(currentContext);
 ```
