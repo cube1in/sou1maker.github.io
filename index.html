@@ -1,121 +1,145 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sou1Maker</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="assets/katex.min.css" />
+    <link rel="stylesheet" href="assets/themes/vue.css" title="vue" disabled />
+    <link
+      rel="stylesheet"
+      href="assets/themes/dark.css"
+      title="dark"
+      disabled
+    />
+    <link
+      rel="stylesheet"
+      href="assets/themes/dolphin.css"
+      title="dolphin"
+      disabled
+    />
+    <style>
+      .no-underline {
+        text-decoration: none !important;
+      }
+      .no-underline:hover {
+        text-decoration: underline !important;
+      }
+      p[data-lang="plantuml"] {
+        overflow: auto;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Sou1Maker</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="assets/katex.min.css">
-  <link rel="stylesheet" href="assets/themes/vue.css" title="vue" disabled>
-  <link rel="stylesheet" href="assets/themes/dark.css" title="dark" disabled>
-  <link rel="stylesheet" href="assets/themes/dolphin.css" title="dolphin" disabled>
-  <style>
-    .no-underline{
-      text-decoration: none !important;
-    }
-    .no-underline:hover{
-      text-decoration: underline !important;
-    }
-    p[data-lang=plantuml] {
-      overflow: auto;
-    }
-  </style>
-</head>
+  <body>
+    <div id="app">加载中...</div>
+    <script>
+      window.$docsify = {
+        name: "Sou1Maker",
+        basePath: "contents",
+        loadSidebar: true,
+        loadNavbar: true,
+        subMaxLevel: 3,
+        homepage: "home.md",
+        alias: {
+          // sidebar/navbar 都到根目录找
+          "/.*/_sidebar.md": "/_sidebar.md",
+          "/.*/_navbar.md": "/_navbar.md",
+        },
+        search: {
+          maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+          paths: "auto", // or 'auto'
+          placeholder: "搜索",
 
-<body>
-  <div id="app">加载中...</div>
-  <script>
-    window.$docsify = {
-      name: 'Sou1Maker',
-      basePath: 'contents',
-      loadSidebar: true,
-      loadNavbar: true,
-      subMaxLevel: 3,
-      homepage: 'home.md',
-      alias: { // sidebar/navbar 都到根目录找
-        '/.*/_sidebar.md': '/_sidebar.md',
-        '/.*/_navbar.md': '/_navbar.md'
-      },
-      search: {
-        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-        paths: 'auto', // or 'auto'
-        placeholder: '搜索',
+          noData: "No 找不到结果!",
 
-        noData: 'No 找不到结果!',
+          // 搜索标题的最大程级, 1 - 6
+          depth: 6,
+        },
+        pagination: {
+          previousText: "上一章节",
+          nextText: "下一章节",
+        },
+        plantuml: {
+          renderSvgAsObject: true,
+        },
+        copyCode: {
+          buttonText: "点击复制",
+          errorText: "错误",
+          successText: "已复制至粘贴板",
+        },
+        tabs: {
+          persist: true, // 确定在刷新/重新访问页面后是否将还原选项卡选择
+          sync: true, // 确定选项卡选择是否将在具有匹配标签的选项卡之间同步
+          theme: "classic", // 主题
+          tabComments: true, // 确定是否可以使用选项卡注释定义选项卡集中的选项卡
+          tabHeadings: true, // 确定是否可以使用标题+粗体markdown定义选项卡集中的选项卡
+        },
+        plugins: [
+          function (hook, vm) {
+            hook.beforeEach(function (html) {
+              var url =
+                "https://github.com/sou1maker/sou1maker.github.io/blob/main/contents";
+              var editHtml = `[:memo: 编辑](${url}${vm.route.file})\n`;
+              return (
+                editHtml +
+                html +
+                "\n\n----\n\n" +
+                '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>'
+              );
+            });
+            
+            hook.afterEach(function (html, next) {
+              // 解析成 html 后调用。
+              // beforeEach 和 afterEach 支持处理异步逻辑
+              // 异步处理完成后调用 next(html) 返回结果
+              var utterances = [
+                "<script",
+                'src="https://utteranc.es/client.js"',
+                'repo="sou1maker/sou1maker.github.io"',
+                'issue-term="pathname"',
+                'theme="github-light"',
+                'crossorigin="anonymous"',
+                "async>",
+                "</script>",
+              ].join("");
+              next(html + utterances);
+            });
+          },
+        ],
+      };
+    </script>
+    <script src="assets/docsify.min.js"></script>
+    <script src="assets/docsify-katex.js"></script>
+    <script src="assets/search.min.js"></script>
+    <script src="assets/docsify-copy-code.min.js"></script>
+    <script src="assets/emoji.js"></script>
+    <script src="assets/docsify-pagination.min.js"></script>
+    <script src="assets/docsify-plantuml.min.js"></script>
+    <script src="assets/prism-ini.min.js"></script>
+    <script src="assets/prism-bash.min.js"></script>
+    <script src="assets/prism-markdown.min.js"></script>
+    <script src="assets/prism-nginx.min.js"></script>
+    <script src="assets/prism-csharp.min.js"></script>
+    <script src="assets/docsify-tabs.min.js"></script>
+    <script>
+      var themes = Docsify.dom.findAll('[rel="stylesheet"]');
 
-        // 搜索标题的最大程级, 1 - 6
-        depth: 6
-      },
-      pagination: {
-        previousText: '上一章节',
-        nextText: '下一章节',
-      },
-      plantuml: {
-        renderSvgAsObject: true,
-      },
-      copyCode: {
-      buttonText : '点击复制',
-      errorText  : '错误',
-      successText: '已复制至粘贴板'
-      },
-      tabs: {
-      persist    : true,      // 确定在刷新/重新访问页面后是否将还原选项卡选择
-      sync       : true,      // 确定选项卡选择是否将在具有匹配标签的选项卡之间同步
-      theme      : 'classic', // 主题
-      tabComments: true,      // 确定是否可以使用选项卡注释定义选项卡集中的选项卡
-      tabHeadings: true       // 确定是否可以使用标题+粗体markdown定义选项卡集中的选项卡
-      },
-      plugins: [
-        function (hook, vm) {
-          hook.beforeEach(function (html) {
-            var url = 'https://github.com/sou1maker/sou1maker.github.io/blob/main/contents';
-            var editHtml = `[:memo: 编辑](${url}${vm.route.file})\n`;
-            return editHtml +
-              html +
-              '\n\n----\n\n' +
-              '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>';
-          })
-        }
-      ]
-    }
-  </script>
-  <script src="assets/docsify.min.js"></script>
-  <script src="assets/docsify-katex.js"></script>
-  <script src="assets/search.min.js"></script>
-  <script src="assets/docsify-copy-code.min.js"></script>
-  <script src="assets/emoji.js"></script>
-  <script src="assets/docsify-pagination.min.js"></script>
-  <script src="assets/docsify-plantuml.min.js"></script>
-  <script src="assets/prism-ini.min.js"></script>
-  <script src="assets/prism-bash.min.js"></script>
-  <script src="assets/prism-markdown.min.js"></script>
-  <script src="assets/prism-nginx.min.js"></script>
-  <script src="assets/prism-csharp.min.js"></script>
-  <script src="assets/docsify-tabs.min.js"></script>
-  <script>
-    var themes = Docsify.dom.findAll('[rel="stylesheet"]');
-
-    function changeTheme(title) {
-      if (!title) title = "vue";
-      themes.forEach(function (theme) {
-        if (theme.title) {
-          theme.disabled = theme.title !== title;
-        }
-      });
-      localStorage.setItem("docsify.theme", title);
-    }
-    changeTheme(localStorage.getItem("docsify.theme"));
-  </script>
-  <script src="https://utteranc.es/client.js"
-          repo="sou1maker/sou1maker.github.io"
-          issue-term="pathname"
-          theme="github-light"
-          crossorigin="anonymous"
-          async>
-  </script>
-
-</body>
-
+      function changeTheme(title) {
+        if (!title) title = "vue";
+        themes.forEach(function (theme) {
+          if (theme.title) {
+            theme.disabled = theme.title !== title;
+          }
+        });
+        localStorage.setItem("docsify.theme", title);
+      }
+      changeTheme(localStorage.getItem("docsify.theme"));
+    </script>
+  </body>
 </html>
