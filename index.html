@@ -93,22 +93,8 @@
                 '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>'
               );
             });
-            
             hook.afterEach(function (html, next) {
-              // 解析成 html 后调用。
-              // beforeEach 和 afterEach 支持处理异步逻辑
-              // 异步处理完成后调用 next(html) 返回结果
-              var utterances = [
-                "<script",
-                'src="https://utteranc.es/client.js"',
-                'repo="sou1maker/sou1maker.github.io"',
-                'issue-term="pathname"',
-                'theme="github-light"',
-                'crossorigin="anonymous"',
-                "async>",
-                "</script>",
-              ].join("");
-              next(html + utterances);
+              next(html + '<script src="https://utteranc.es/client.js" repo="sou1maker/sou1maker.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>');
             });
           },
         ],
@@ -141,5 +127,13 @@
       }
       changeTheme(localStorage.getItem("docsify.theme"));
     </script>
+    <script
+      src="https://utteranc.es/client.js"
+      repo="sou1maker/sou1maker.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async
+    ></script>
   </body>
 </html>
