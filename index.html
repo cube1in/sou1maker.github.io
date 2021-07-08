@@ -26,6 +26,13 @@
 
 <body>
   <div id="app">加载中...</div>
+  <script src="https://utteranc.es/client.js"
+        repo="https://github.com/sou1maker/utterances-comments.git"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
   <script>
     window.$docsify = {
       name: 'Sou1Maker',
@@ -74,14 +81,6 @@
             var editHtml = `[:memo: 编辑](${url}${vm.route.file})\n`;
             return editHtml +
               html +
-              '\n\n----\n\n' +
-              '<script src="https://utteranc.es/client.js"
-                    repo="https://github.com/sou1maker/utterances-comments.git"
-                    issue-term="url"
-                    theme="github-light"
-                    crossorigin="anonymous"
-                    async>
-              </script>' +
               '\n\n----\n\n' +
               '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>';
           })
