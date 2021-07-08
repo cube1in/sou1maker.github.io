@@ -75,6 +75,14 @@
             return editHtml +
               html +
               '\n\n----\n\n' +
+              '<script src="https://utteranc.es/client.js"
+                    repo="https://github.com/sou1maker/utterances-comments.git"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+              </script>' +
+              '\n\n----\n\n' +
               '<a href="https://github.com/sou1maker/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">©2021 sou1maker.github.io</a>';
           })
         }
@@ -107,14 +115,6 @@
       localStorage.setItem("docsify.theme", title);
     }
     changeTheme(localStorage.getItem("docsify.theme"));
-  </script>
-  
-  <script src="https://utteranc.es/client.js"
-        repo="https://github.com/sou1maker/utterances-comments.git"
-        issue-term="url"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
   </script>
 
 </body>
