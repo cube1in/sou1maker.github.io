@@ -26,13 +26,6 @@
 
 <body>
   <div id="app">加载中...</div>
-  <script src="https://utteranc.es/client.js"
-          repo="sou1maker/sou1maker.github.io"
-          issue-term="pathname"
-          theme="github-light"
-          crossorigin="anonymous"
-          async>
-  </script>
   <script>
     window.$docsify = {
       name: 'Sou1Maker',
@@ -114,6 +107,13 @@
       localStorage.setItem("docsify.theme", title);
     }
     changeTheme(localStorage.getItem("docsify.theme"));
+  </script>
+  <script src="https://utteranc.es/client.js"
+        repo="sou1maker/sou1maker.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
   </script>
 
 </body>
